@@ -1,0 +1,7 @@
+<h1>GDG Event Tracker</h1>
+
+<ul>
+  @for (event of events(); track event.id) {
+    <li>{{ event.name }} — budget: ${{ event.budget }}</li>
+  }
+</ul>
