@@ -1,7 +1,26 @@
-<h1>GDG Event Tracker</h1>
+<!-- <h1>GDG Event Tracker</h1>
 
 <ul>
   @for (event of events(); track event.id) {
     <li>{{ event.name }} — budget: ${{ event.budget }}</li>
+  }
+</ul> -->
+
+<h1>GDG Event Tracker</h1>
+
+<h2>Add an event</h2>
+<div>
+  <input [(ngModel)]="newName" placeholder="Event name" />
+  <input [(ngModel)]="newBudget" type="number" placeholder="Budget" />
+  <button (click)="addEvent()">Add</button>
+</div>
+
+<h2>Events</h2>
+<ul>
+  @for (event of events(); track event.id) {
+  <li>
+    {{ event.name }} — budget: ${{ event.budget }}
+    <button (click)="deleteEvent(event.id)">Delete</button>
+  </li>
   }
 </ul>
