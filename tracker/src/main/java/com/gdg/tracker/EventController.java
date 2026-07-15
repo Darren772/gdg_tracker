@@ -9,11 +9,14 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class EventController {
 
+    private final EventService eventService;
+
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
+    }
+
     @GetMapping("/events")
     public List<Event> getAllEvents() {
-        return List.of(
-            new Event(1L, "Flutter Workshop", 500),
-            new Event(2L, "DevFest", 2000)
-        );
+        return eventService.getAllEvents();
     }
 }
