@@ -18,9 +18,37 @@
 <h2>Events</h2>
 <ul>
   @for (event of events(); track event.id) {
-  <li>
-    {{ event.name }} — budget: ${{ event.budget }}
-    <button (click)="deleteEvent(event.id)">Delete</button>
-  </li>
+    <li>
+      <span (click)="selectEvent(event)" style="cursor: pointer;">
+        {{ event.name }} — budget: ${{ event.budget }}
+      </span>
+      <button (click)="deleteEvent(event.id)">Delete</button>
+    </li>
   }
 </ul>
+
+@if (selectedEvent(); as event) {
+  <div style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
+    <h2>Expenses for {{ event.name }}</h2>
+
+    <p>
+      Spent: ${{ totalSpent() }} / Budget: ${{ event.budget }}
+      — Remaining: ${{ event.budget - totalSpent() }}
+    </p>
+
+    <div>
+      <input [(ngModel)]="newExpenseDesc" placeholder="Expense description" />
+      <input [(ngModel)]="newExpenseAmount" type="number" placeholder="Amount" />
+      <button (click)="addExpense()">Add Expense</button>
+    </div>
+
+    <ul>
+      @for (expense of expenses(); track expense.id) {
+        <li>
+          {{ expense.description }} — ${{ expense.amount }}
+          <button (click)="deleteExpense(expense.id)">Delete</button>
+        </li>
+      }
+    </ul>
+  </div>
+}
